@@ -9,6 +9,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Banco de Horas - Sistema de RH");
+        Console.WriteLine("Banco - BIG BANK");
     }
 }
