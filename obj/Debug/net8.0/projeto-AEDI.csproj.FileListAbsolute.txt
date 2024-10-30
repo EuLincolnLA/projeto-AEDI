@@ -1,0 +1,15 @@
+/home/linco/dev/projeto-AEDI/bin/Debug/net8.0/projeto-AEDI
+/home/linco/dev/projeto-AEDI/bin/Debug/net8.0/projeto-AEDI.deps.json
+/home/linco/dev/projeto-AEDI/bin/Debug/net8.0/projeto-AEDI.runtimeconfig.json
+/home/linco/dev/projeto-AEDI/bin/Debug/net8.0/projeto-AEDI.dll
+/home/linco/dev/projeto-AEDI/bin/Debug/net8.0/projeto-AEDI.pdb
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.GeneratedMSBuildEditorConfig.editorconfig
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.AssemblyInfoInputs.cache
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.AssemblyInfo.cs
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.csproj.CoreCompileInputs.cache
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.sourcelink.json
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.dll
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/refint/projeto-AEDI.dll
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.pdb
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/projeto-AEDI.genruntimeconfig.cache
+/home/linco/dev/projeto-AEDI/obj/Debug/net8.0/ref/projeto-AEDI.dll
