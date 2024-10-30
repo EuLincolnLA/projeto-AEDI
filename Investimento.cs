@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 class Investimento {
     private float cdb;
@@ -9,12 +8,14 @@ class Investimento {
     private float saldoCdb = 0;
     private float saldoTesouroSelic = 0;
     private float saldoTesouroDireto = 0;
-    private float saldoConta = 0;
+    private float saldoTotalInvestido = 0;
+    private Conta conta;
 
-    public Investimento(float cdb, float tesouroSelic, float tesouroDireto) {
+    public Investimento(float cdb, float tesouroSelic, float tesouroDireto, Conta conta) {
         this.cdb = cdb;
         this.tesouroSelic = tesouroSelic;
         this.tesouroDireto = tesouroDireto;
+        this.conta = conta;
     }
 
     public void MenuInvestimento() {
@@ -23,11 +24,11 @@ class Investimento {
         while (opcao != "0") {
             Console.Clear();
             Console.WriteLine("=====================================================");
-            Console.WriteLine("===              Investimentos                    ===");
+            Console.WriteLine("===                Investimentos                  ===");
             Console.WriteLine("=====================================================");
             Console.WriteLine("1 - Investir.");
             Console.WriteLine("2 - Sacar Investimento.");
-            Console.WriteLine("3 - Ver Saldo da Conta.");
+            Console.WriteLine("3 - Ver Saldo Total Investido.");
             Console.WriteLine("0 - Voltar.");
             opcao = Console.ReadLine();
 
@@ -39,10 +40,10 @@ class Investimento {
                     SacarInvestimento();
                     break;
                 case "3":
-                    VerSaldoConta();
+                    VerSaldoTotalInvestido();
                     break;
                 case "0":
-                    Console.WriteLine("Voltando ao menu principal...");
+                    Console.WriteLine("Voltando ao menu anterior...");
                     break;
                 default:
                     Console.WriteLine("Opção inválida! Pressione qualquer tecla para continuar.");
@@ -52,7 +53,7 @@ class Investimento {
         }
     }
 
-    public void MenuInvestir() {
+    private void MenuInvestir() {
         string opcao = "";
 
         while (opcao != "0") {
@@ -87,34 +88,44 @@ class Investimento {
         }
     }
 
-    private void RealizarInvestimento(string tipo, float rendimentoMensal, ref float saldoInvestimento) {
-        Console.Clear();
-        Console.WriteLine($"Você escolheu: {tipo}");
-        Console.Write("Digite a quantia que deseja investir: ");
-        float quantia = float.Parse(Console.ReadLine());
+private void RealizarInvestimento(string tipo, float rendimentoMensal, ref float saldoInvestimento) {
+    Console.Clear();
+    Console.WriteLine($"Você escolheu: {tipo}");
+    Console.Write("Digite a quantia que deseja investir: ");
+    float quantia = float.Parse(Console.ReadLine());
 
-        float rendimento = quantia * (rendimentoMensal / 100);
-        Console.WriteLine($"Com base na taxa de {rendimentoMensal}%, o rendimento mensal será: {rendimento:C}");
-
-        string confirmar = "";
-        while (confirmar.ToLower() != "s" && confirmar.ToLower() != "n") {
-            Console.Write("Deseja confirmar o investimento? (s/n): ");
-            confirmar = Console.ReadLine();
-
-            if (confirmar.ToLower() == "s") {
-                saldoInvestimento += quantia + rendimento;
-                Console.WriteLine("Investimento confirmado!");
-            } else if (confirmar.ToLower() == "n") {
-                Console.WriteLine("Investimento cancelado.");
-            } else {
-                Console.Clear();
-                Console.WriteLine("Opção inválida! Digite 's' para confirmar ou 'n' para cancelar.");
-            }
-        }
-
+    // Verifica se o usuário tem saldo suficiente na conta
+    if (quantia > conta.Getsaldo()) {
+        Console.WriteLine("Saldo insuficiente na conta para realizar o investimento.");
         Console.WriteLine("Pressione qualquer tecla para continuar.");
         Console.ReadKey();
+        return;
     }
+
+    float rendimento = quantia * (rendimentoMensal / 100);
+    Console.WriteLine($"Com base na taxa de {rendimentoMensal}%, o rendimento mensal será: {rendimento:C}");
+
+    string confirmar = "";
+    while (confirmar.ToLower() != "s" && confirmar.ToLower() != "n") {
+        Console.Write("Deseja confirmar o investimento? (s/n): ");
+        confirmar = Console.ReadLine();
+
+        if (confirmar.ToLower() == "s") {
+            conta.Depositar(-quantia);
+            saldoInvestimento += quantia;
+            saldoTotalInvestido += quantia;
+            Console.WriteLine("Investimento confirmado!");
+        } else if (confirmar.ToLower() == "n") {
+            Console.WriteLine("Investimento cancelado.");
+        } else {
+            Console.Clear();
+            Console.WriteLine("Opção inválida! Digite 's' para confirmar ou 'n' para cancelar.");
+        }
+    }
+
+    Console.WriteLine("Pressione qualquer tecla para continuar.");
+    Console.ReadKey();
+}
 
     private void SacarInvestimento() {
         string opcao = "";
@@ -124,9 +135,9 @@ class Investimento {
             Console.WriteLine("=====================================================");
             Console.WriteLine("===                Sacar Investimento             ===");
             Console.WriteLine("=====================================================");
-            Console.WriteLine("1 - CDB.");
-            Console.WriteLine("2 - Tesouro Direto.");
-            Console.WriteLine("3 - Tesouro Selic.");
+            Console.WriteLine("1 - Sacar do CDB.");
+            Console.WriteLine("2 - Sacar do Tesouro Direto.");
+            Console.WriteLine("3 - Sacar do Tesouro Selic.");
             Console.WriteLine("0 - Voltar.");
             opcao = Console.ReadLine();
 
@@ -162,7 +173,7 @@ class Investimento {
 
             if (quantia <= saldoInvestimento) {
                 saldoInvestimento -= quantia;
-                saldoConta += quantia;
+                conta.Depositar(quantia);
                 Console.WriteLine($"Saque realizado com sucesso! {quantia:C} foi adicionado à sua conta.");
             } else {
                 Console.WriteLine("Saldo insuficiente para o saque.");
@@ -175,9 +186,9 @@ class Investimento {
         Console.ReadKey();
     }
 
-    private void VerSaldoConta() {
+    private void VerSaldoTotalInvestido() {
         Console.Clear();
-        Console.WriteLine($"Saldo atual da conta: {saldoConta:C}");
+        Console.WriteLine($"Saldo total investido: {saldoTotalInvestido:C}");
         Console.WriteLine("Pressione qualquer tecla para continuar.");
         Console.ReadKey();
     }

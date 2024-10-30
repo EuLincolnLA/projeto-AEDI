@@ -1,29 +1,34 @@
-﻿using System;
-
-namespace projeto_AEDI;
-
-class Program {
+﻿class Program {
     static void Main(string[] args) {
-        string opcao = "";
-        Investimento investir = new Investimento(11.2f, 6.8f, 10.5f);
+        Conta conta = new Conta("João Silva", 123456, 1234, 1000.0f);
+        Investimento investimento = new Investimento(10f, 15f, 20f, conta);
 
+        string opcao = "";
         while (opcao != "0") {
             Console.Clear();
             Console.WriteLine("=====================================================");
-            Console.WriteLine("===              Banco - BIG BANK                 ===");
+            Console.WriteLine("===                Banco - BIG BANK               ===");
             Console.WriteLine("=====================================================");
-            Console.WriteLine("1 - Investimento");
+            Console.WriteLine("1 - Acessar Conta.");
+            Console.WriteLine("2 - Acessar Investimentos.");
             Console.WriteLine("0 - Sair.");
             opcao = Console.ReadLine();
 
-            if (opcao == "1") {
-                investir.MenuInvestimento();
-            } else if (opcao != "0") {
-                Console.WriteLine("Opção inválida! Pressione qualquer tecla para continuar.");
-                Console.ReadKey();
+            switch (opcao) {
+                case "1":
+                    conta.MenuConta();
+                    break;
+                case "2":
+                    investimento.MenuInvestimento();
+                    break;
+                case "0":
+                    Console.WriteLine("Saindo...");
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida! Pressione qualquer tecla para continuar.");
+                    Console.ReadKey();
+                    break;
             }
         }
-
-        Console.WriteLine("Encerrando o programa...");
     }
 }
