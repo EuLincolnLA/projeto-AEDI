@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("projeto-AEDI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+207dc32eb1564549365714fa86c4bdd284421736")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4561f1c1ee917983f582b8497a5ee8a8833abce2")]
 [assembly: System.Reflection.AssemblyProductAttribute("projeto-AEDI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("projeto-AEDI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
